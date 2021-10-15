@@ -1,4 +1,5 @@
 import 'package:countries/data/country_api.dart';
+import 'package:countries/data/one_country_api.dart';
 import 'package:countries/models/country_model.dart';
 import 'package:countries/screens/weather_page.dart';
 import 'package:countries/widgets/bottom_navigation_bar_items.dart';
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
   double? _height;
   double? _width;
+  String _searchingCountry = '';
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           ),
           _setList(),
           _setCategoryTitle("Top Rated"),
-          _setList(),
+          _buildCountry(),
         ],
       );
 
@@ -78,6 +80,11 @@ class _HomePageState extends State<HomePage> {
                 border: _getBorder(),
                 enabledBorder: _getBorder(),
                 focusedBorder: _getBorder()),
+            onSubmitted: (value) {
+              setState(() {
+                _searchingCountry = value;
+              });
+            },
           ),
           const Divider(height: 1.0, thickness: 1.0),
         ],
@@ -97,54 +104,56 @@ class _HomePageState extends State<HomePage> {
                     itemCount: snap.data!.length,
                     itemBuilder: (context, index) {
                       Country country = snap.data![index];
-                      return InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.only(bottom: 16, left: 12),
-                          margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                          height: _height! * 0.3,
-                          width: _width! * 0.4,
-                          decoration: BoxDecoration(
-                            color: colorGreen,
-                            borderRadius: _setBorderRadius(),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://source.unsplash.com/random/$index"),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              setBoldText(country.name!.common!,
-                                  textColor: colorWhite),
-                              Row(
-                                children: [
-                                  setIcon(Icons.star,
-                                      color: colorAmber, size: 16.0),
-                                  setLightText(
-                                    "4.2 - 0.3 mil",
-                                    textColor: colorGrey,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => WeatherPage(country),
-                            ),
-                          );
-                        },
-                      );
+                      return _setCountryLayout(index, country, _width! * 0.4);
                     })
                 : showCircularIndicator;
           },
         ),
       );
+
+  InkWell _setCountryLayout(int index, Country country, double width) {
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 16, left: 12),
+        margin: const EdgeInsets.symmetric(horizontal: 12.0),
+        height: _height! * 0.3,
+        width: width,
+        decoration: BoxDecoration(
+          color: colorGreen,
+          borderRadius: _setBorderRadius(),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage("https://source.unsplash.com/random/$index"),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            setBoldText(country.name!.common!, textColor: colorWhite),
+            const SizedBox(height: 6.0),
+            Row(
+              children: [
+                setIcon(Icons.star, color: colorAmber, size: 16.0),
+                setLightText(
+                  "4.2 - 0.3 mil",
+                  textColor: colorGrey,
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => WeatherPage(country),
+          ),
+        );
+      },
+    );
+  }
 
   Padding _setCategoryTitle(String title) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -162,6 +171,14 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       );
+
+  _buildCountry() => FutureBuilder(
+      future: getCountryDataFromApi(_searchingCountry),
+      builder: (context, AsyncSnapshot<List<Country>> snap) {
+        return snap.hasData
+            ? _setCountryLayout(0, snap.data![0], _width!)
+            : showCircularIndicator;
+      });
 
   OutlineInputBorder _getBorder() => const OutlineInputBorder(
         borderSide: BorderSide(style: BorderStyle.none),

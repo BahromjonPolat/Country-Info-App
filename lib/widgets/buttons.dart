@@ -23,6 +23,7 @@ ElevatedButton setElevatedButton(
 ) =>
     ElevatedButton(
       style: ElevatedButton.styleFrom(
+          elevation: 0.0,
           shape: _getButtonShape(),
           padding: const EdgeInsets.symmetric(vertical: 16.0)),
       onPressed: onPressed,

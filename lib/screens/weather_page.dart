@@ -70,7 +70,6 @@ class WeatherPage extends StatelessWidget {
         child: FutureBuilder(
             future: getWeatherData(country.capital![0]),
             builder: (context, AsyncSnapshot<Weather> snap) {
-              Weather weather = snap.data!;
               return snap.hasData
                   ? Row(
                       children: [
@@ -84,12 +83,12 @@ class WeatherPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             setBoldText(
-                              weather.temperature,
+                              snap.data!.temperature,
                               textColor: colorWhite,
                               size: 24.0,
                             ),
                             setLightText(
-                              "Wind: ${weather.wind}",
+                              "Wind: ${snap.data!.wind}",
                               textColor: colorWhite,
                             ),
                           ],
