@@ -18,6 +18,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   final PageController _pageController = PageController();
+
   int _currentIndex = 0;
 
   double? _height;
@@ -36,10 +37,21 @@ class _DetailsPageState extends State<DetailsPage> {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: _buildAppBar(),
       body: _buildBody(),
       bottomNavigationBar: _showFooterButtons(),
     );
   }
+
+  AppBar _buildAppBar() => AppBar(
+        backgroundColor: colorTransparent,
+        elevation: 0.0,
+        leading: setIconButton(
+          Icons.arrow_back_outlined,
+          () {},
+        ),
+      );
 
   SingleChildScrollView _buildBody() => SingleChildScrollView(
         child: Column(
@@ -90,6 +102,7 @@ class _DetailsPageState extends State<DetailsPage> {
             height: _height! * 0.3,
             color: colorGreen,
             child: PageView(
+              controller: _pageController,
               onPageChanged: (i) {
                 setState(() {
                   _currentIndex = i;
@@ -181,7 +194,8 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
           const SizedBox(width: 32.0),
           Expanded(
-              child: setOutlinedButton(() {}, "Follow", color: colorGreen)),
+            child: setOutlinedButton(() {}, "Follow", color: colorGreen),
+          ),
         ],
       );
 
@@ -206,11 +220,10 @@ class _DetailsPageState extends State<DetailsPage> {
         backgroundColor: const Color(0xffcecece),
         onPressed: onPressed,
         child: setIcon(iconData, size: 16),
-
       );
 
-  void _onGpsButtonClicked()  {
-     launch(_country!.maps!.googleMaps!);
+  void _onGpsButtonClicked() {
+    launch(_country!.maps!.googleMaps!);
   }
 
   final String _description =
