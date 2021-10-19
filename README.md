@@ -37,5 +37,5 @@ Ushbu sahifada quyidagi ma'lumotlar bor:
 
 Mamlakatning rasmlari (Random)</br>
 Navigation tugmasiga bosilsa, xaritadan mamlakatni ko'rish</br>
-Ma'lumotlar bo'limida Mamlakatning maydoni, aholi soni, joylashgan qit'asi va u haqidagi 'Wikipedia'dan olingan ma'lumotlar bo'ladi.
+Ma'lumotlar bo'limida Mamlakatning maydoni, aholi soni, joylashgan qit'asi va u haqidagi '<a href="https://wikipedia.com/" target="_blank">Wikipedia</a>'dan olingan ma'lumotlar bo'ladi.
 
