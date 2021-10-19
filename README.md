@@ -1,16 +1,41 @@
-# countries
+# Countries App
 
-A new Flutter project.
+Davlatlar haqida ma'lumot beradigan ilova.
 
-## Getting Started
+## Ilova sahifalari
 
-This project is a starting point for a Flutter application.
+### Asosiy sahifa
+### Ob-havo sahifasi
+### Batafsil ma'lumot sahifasi
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+ilova ishga tushganida <b>[Asosiy sahifa](https://github.com/BahromjonPolat/Country-Info-App/blob/main/lib/screens/home_page.dart)</b> ochiladi.
+</br>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ <img src="https://raw.githubusercontent.com/BahromjonPolat/Country-Info-App/main/assets/screenshots/main.jpg"
+     alt="Onboarding page"
+     style="float: left; margin-right: 10px;" width="200" />
+ </br>
+ 
+ Ro'yxatdagi mamlakatlardan biriga kirilsa o'sha mamlakatning poytaxti ob-havosini ko'rsatadi.
+</br>
+
+ <img src="https://raw.githubusercontent.com/BahromjonPolat/Country-Info-App/main/assets/screenshots/weather.jpg"
+     alt="Onboarding page"
+     style="float: left; margin-right: 10px;" width="200" />
+ </br>
+ 
+ <b>[Ob-havo sahifa](https://github.com/BahromjonPolat/Country-Info-App/blob/main/lib/screens/home_page.dart)</b>sidagi <b>Preview</b> noomli tugma bosilsa, Mamlakat haqida ko'proq ma'lumot ko'rsatadigan 
+ <b>[Details sahifa](https://github.com/BahromjonPolat/Country-Info-App/blob/main/lib/screens/home_page.dart)</b>siga o'tadi.
+ 
+
+ <img src="https://raw.githubusercontent.com/BahromjonPolat/Country-Info-App/main/assets/screenshots/details.jpg"
+     alt="Onboarding page"
+     style="float: left; margin-right: 10px;" width="200" />
+ </br> 
+Ushbu sahifada quyidagi ma'lumotlar bor:
+
+Mamlakatning rasmlari (Random)</br>
+Navigation tugmasiga bosilsa, xaritadan mamlakatni ko'rish</br>
+Ma'lumotlar bo'limida Mamlakatning maydoni, aholi soni, joylashgan qit'asi va u haqidagi 'Wikipedia'dan olingan ma'lumotlar bo'ladi.
+
