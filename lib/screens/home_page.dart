@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
   double? _height;
   double? _width;
-  String _searchingCountry = '';
+  String _searchingCountry = 'Uzbekistan';
 
   @override
   Widget build(BuildContext context) {
